@@ -13,7 +13,7 @@ export default function Login () {
        signInWithEmailAndPassword(auth,email,password)
             .then( (userCredential) => {
                 console.log( userCredential.user )
-                router.replace('/home')
+                router.replace('/search')
             })
             .catch( (error) => {
                 console.log( error.code, error.message )

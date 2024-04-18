@@ -17,7 +17,7 @@ export default function Layout() {
 
     onAuthStateChanged( FBauth, (user) => {
         if(user) {
-            router.navigate('/home')
+            router.navigate('/search')
         }
     })
 
