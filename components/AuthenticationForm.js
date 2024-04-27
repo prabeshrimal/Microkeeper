@@ -59,7 +59,7 @@ export function AuthenticationForm ( props ) {
 
 const styles = StyleSheet.create({
     form: {
-        backgroundColor: 'rgb(0,213,255)',
+        backgroundColor: 'rgb(0,213,255npm )',
         marginHorizontal: 20,
         padding: 20,
         borderRadius: 10,

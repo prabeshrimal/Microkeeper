@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ImageBackground } from 'react-native';
 import { Stack, Link, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Search(props) {
     const router = useRouter();
@@ -17,10 +18,17 @@ export default function Search(props) {
         setMenuOpen(false);
     };
 
-    const handleSignOut = () => {
-        // Implement sign-out logic here
-        console.log('Sign Out');
-        setMenuOpen(false);
+    const handleSignOut = async () => {
+        try {
+            // Clear user authentication token from AsyncStorage or other storage mechanism
+            await AsyncStorage.removeItem('userToken');
+            console.log('Sign Out');
+
+            // Navigate to the login screen (assuming the route name is 'Login')
+            router.push('/login'); // Replace 'Login' with the actual route name for the login screen
+        } catch (error) {
+            console.error('Error clearing user token:', error);
+        }
     };
 
     const handleNavigate = (route) => {
@@ -30,16 +38,18 @@ export default function Search(props) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Ionicons
-                    name={menuOpen ? 'close' : 'menu'}
-                    size={24}
-                    color="#2c3e50" // Dark gray color
-                    style={styles.menuIcon}
-                    onPress={handleMenuToggle}
-                />
-                <Text style={styles.title}>Microkeeper</Text>
-            </View>
+            <ImageBackground style={styles.imageBackground} source={require("../assets/andrik-langfield-0rTCXZM7Xfo-unsplash.jpg")}>
+                <View style={styles.header}>
+                    <Ionicons
+                        name={menuOpen ? 'close' : 'menu'}
+                        size={24}
+                        color="#2c3e50" // Dark gray color
+                        style={styles.menuIcon}
+                        onPress={handleMenuToggle}
+                    />
+                    <Text style={styles.title}>Microkeeper</Text>
+                </View>
+            </ImageBackground>
             {menuOpen && (
                 <View style={styles.dropdown}>
                     <Pressable style={styles.menuItem} onPress={handleSignIn}>
@@ -64,6 +74,9 @@ export default function Search(props) {
                     <Text style={styles.buttonText}>About Us</Text>
                 </Pressable>
             </View>
+            <Pressable style={styles.signOutButton} onPress={handleSignOut}>
+                <Text style={styles.signOutButtonText}>Sign Out</Text>
+            </Pressable>
         </View>
     );
 }
@@ -130,5 +143,21 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff', // White color
     },
-    // Other styles for Pressable buttons and content in the middle section
+    imageBackground: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+    },
+    signOutButton: {
+        position: 'absolute',
+        bottom: 20,
+        backgroundColor: '#e74c3c', // Red color
+        padding: 10,
+        borderRadius: 5,
+    },
+    signOutButtonText: {
+        fontSize: 18,
+        color: '#fff', // White color
+        fontWeight: 'bold',
+    },
 });

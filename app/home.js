@@ -24,14 +24,17 @@ const Home = () => {
   };
 
   return (
+    <>
+    <Text style={styles.headTitle}>Home</Text>
+
     <View style={styles.container}>
       {/* Employee Console */}
       <View style={styles.employeeConsole}>
         <Text style={styles.consoleTitle}>Employee Console</Text>
         {/* Add your employee console content here */}
         {/* For example: */}
-        <Button title="COVID Vaccine Cert" onPress={() => console.log("COVID Vaccine Cert")} color="#3498db" />
-        <Button title="RIW Cert" onPress={() => console.log("RIW Cert")} color="#2ecc71" />
+        <Button title="COVID Vaccine Certificate" onPress={() => console.log("COVID Vaccine Cert")} color="#3498db" />
+        <Button title="RIW Certificate" onPress={() => console.log("RIW Cert")} color="#2ecc71" />
         <Button title="RSA Certificate" onPress={() => console.log("RSA Certificate")} color="#e74c3c" />
       </View>
 
@@ -64,10 +67,18 @@ const Home = () => {
         <Text style={styles.additionalFeatureText}>Additional Feature</Text>
       </TouchableOpacity>
     </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
+  headTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: '25%',
+    textAlign: 'center',
+    color: '#34495e', // Dark blue color
+  },
   container: {
     flex: 1,
     justifyContent: "center",
